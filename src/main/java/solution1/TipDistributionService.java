@@ -6,24 +6,22 @@ import java.util.Objects;
 
 public class TipDistributionService {
 
-    private static final int PLATFORM_PERCENT = 5;
-    private static final int RESTAURANT_PERCENT = 10;
     private static final int HARD_DELIVERY_BONUS_PERCENT = 15;
 
-    public DistributionResult distribute(long tipAmount, Delivery delivery) {
+    public DistributionResult distribute(long tipAmount, Delivery1 delivery1) {
         if (tipAmount < 0) {
             throw new IllegalArgumentException("tipAmount must not be negative");
         }
 
-        Objects.requireNonNull(delivery, "delivery must not be null");
+        Objects.requireNonNull(delivery1, "delivery must not be null");
 
-        long platformAmount = percentFloor(tipAmount, PLATFORM_PERCENT);
+        long platformAmount = percentFloor(tipAmount, Participant.PLATFORM.getPercent());
 
-        long restaurantAmount = delivery.restaurantInLoyaltyProgram()
-                ? percentFloor(tipAmount, RESTAURANT_PERCENT)
+        long restaurantAmount = delivery1.restaurantInLoyaltyProgram()
+                ? percentFloor(tipAmount, Participant.RESTAURANT.getPercent())
                 : 0;
 
-        if (delivery.hardDelivery()) {
+        if (delivery1.hardDelivery()) {
             long courierBonus = percentFloor(tipAmount, HARD_DELIVERY_BONUS_PERCENT);
 
             // Бонус курьеру идёт за счёт платформы,
@@ -46,7 +44,7 @@ public class TipDistributionService {
 
         validateResult(tipAmount, result);
 
-        return new DistributionResult(delivery.orderId(), result);
+        return new DistributionResult(delivery1.orderId(), result);
     }
 
     private long percentFloor(long amount, int percent) {

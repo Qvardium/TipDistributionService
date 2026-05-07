@@ -1,5 +1,5 @@
 import org.junit.Test;
-import solution1.Delivery;
+import solution1.Delivery1;
 import solution1.DistributionResult;
 import solution1.Participant;
 import solution1.TipDistributionService;
@@ -14,8 +14,8 @@ public class TestSolution1 {
     @Test
     public void test1() {
         TipDistributionService service = new TipDistributionService();
-        Delivery delivery = new Delivery("1","2","3",false,true);
-        var result = service.distribute(1000,delivery);
+        Delivery1 delivery1 = new Delivery1("1","2","3",false,true);
+        var result = service.distribute(1000, delivery1);
 
         Map<Participant,Long> map  = new EnumMap<>(Participant.class);
         map.put(Participant.COURIER,850l);
@@ -29,8 +29,8 @@ public class TestSolution1 {
     @Test
     public void test2() {
         TipDistributionService service = new TipDistributionService();
-        Delivery delivery = new Delivery("1","2","3",true,false);
-        var result = service.distribute(1000,delivery);
+        Delivery1 delivery1 = new Delivery1("1","2","3",true,false);
+        var result = service.distribute(1000, delivery1);
 
         Map<Participant,Long> map  = new EnumMap<>(Participant.class);
         map.put(Participant.COURIER,1000l);
@@ -44,8 +44,8 @@ public class TestSolution1 {
     @Test
     public void test3() {
         TipDistributionService service = new TipDistributionService();
-        Delivery delivery = new Delivery("1","2","3",false,true);
-        var result = service.distribute(999,delivery);
+        Delivery1 delivery1 = new Delivery1("1","2","3",false,true);
+        var result = service.distribute(999, delivery1);
 
         Map<Participant,Long> map  = new EnumMap<>(Participant.class);
         map.put(Participant.COURIER,851l);

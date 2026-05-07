@@ -1,6 +1,6 @@
 package solution1;
 
-public record Delivery(
+public record Delivery1(
         String orderId,
         String courierId,
         String restaurantId,
